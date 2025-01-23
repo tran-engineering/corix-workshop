@@ -25,6 +25,20 @@
 
 ---
 
+## Formalities
+
+Presentation is available at:
+
+https://tran-engineering.github.io/corix-workshop/
+
+Code:
+
+https://tran-engineering.github.io/corix-backend/
+
+https://tran-engineering.github.io/corix-frontend/
+
+---
+
 # Introductions
 
 ---
@@ -43,10 +57,12 @@ Tell me about yourselves and knowledge about:
 
 ---
 
-## Scope of workshop
+## Goal of workshop
 
 * Introduction to dynamic programming in combination with Spring and Angular
 * Learn about what's important about permission policies
+* Get a feeling of what requirements you expect from a permission system
+* Allow you to move forward
 
 ## Out of Scope
 
@@ -291,14 +307,34 @@ Doesn't use `eval()` or similar internally
 
 ---
 
-# Open source / commercial libraries that could work
+## Backend
+
+- Uses JPA with Spring Data
+- Use Spring Data Repositories to access `@Entity` classes
+- `@EditableIf`, `@VisibleIf` annotations
+- PolicyController
 
 ---
 
-## Casbin
+## Frontend
+
+<pre class="mermaid">
+
+sequenceDiagram
+    Frontend -->> Backend: Fetch entity
+    Frontend -->> Backend: Fetch policies
+    Frontend -->> Frontend: Evaluate & Apply EditableIf policy
+    Frontend -->> Frontend: Evaluate & Apply Visible policy
+
+</pre>
 
 ---
 
-## Others
+## Policy
+
+Policy evaluation is done in `policy.service.ts`
 
 ---
+
+
+# Thank you & Questions

@@ -25,6 +25,29 @@
 
 ---
 
+## Formalities
+
+Presentation is available at:
+
+https://tran-engineering.github.io/corix-workshop/
+
+Code:
+
+https://tran-engineering.github.io/corix-backend/
+
+https://tran-engineering.github.io/corix-frontend/
+
+---
+
+## Disclaimers
+
+The code is by no means a complete or even recommended solution.
+
+It is a proof-of-concept to make it easier to understand and think about
+the challenges and to facilitate writing requirements.
+
+---
+
 # Introductions
 
 ---
@@ -43,10 +66,12 @@ Tell me about yourselves and knowledge about:
 
 ---
 
-## Scope of workshop
+## Goal of workshop
 
 * Introduction to dynamic programming in combination with Spring and Angular
 * Learn about what's important about permission policies
+* Get a feeling of what requirements you expect from a permission system
+* Allow you to move forward
 
 ## Out of Scope
 
@@ -131,16 +156,17 @@ But it can be engineered to do so.
 
 ## Software component lifecycle
 
-- Many companies have separate lifecycles for components of a system
-  Maybe this leads to separate implementations of policy enforcement too,
-  since it is hard to keep it in sync.
+Many companies have separate lifecycles for components of a system.
+Maybe this leads to separate implementations of policy enforcement too,
+since it is hard to keep it in sync.
 
 ---
 
 ## User Experience
 
 - Frontend policy validation
-- Live vs onsubmit policy checking
+- Live vs onsubmit policy checking.
+  Are the policies checked on the current/new entity or does it need to support both?
 
 ---
 
@@ -149,6 +175,7 @@ But it can be engineered to do so.
 - Single source of truth, not managing policies differently on front- / backend
 - Policies must be located near/at entities
 - Must be easy to understand / maintain
+  - Introducing new policy/entity should not require modifying code in multiple places
 
 ---
 
@@ -160,16 +187,37 @@ But it can be engineered to do so.
 
 - Spring Boot
 - REST
+- Single Value Update
 
 ---
 
 ## Frontend
 
 - Angular
+- Live Policy Checking
 
 ---
 
 # Hands-On: Try to checkout and run the front- and backend
+
+---
+
+## Clone repository
+
+Requirements: Java 21, Node 22
+
+```bash
+git clone https://github.com/tran-engineering/corix-backend.git
+cd corix-backend
+./gradlew bootRun
+```
+
+
+```bash
+git clone https://github.com/tran-engineering/corix-frontend.git
+cd corix-frontend
+npm start
+```
 
 ---
 
@@ -291,14 +339,34 @@ Doesn't use `eval()` or similar internally
 
 ---
 
-# Open source / commercial libraries that could work
+## Backend
+
+- Uses JPA with Spring Data
+- Use Spring Data Repositories to access `@Entity` classes
+- `@EditableIf`, `@VisibleIf` annotations
+- PolicyController
 
 ---
 
-## Casbin
+## Frontend
+
+<pre class="mermaid">
+
+sequenceDiagram
+    Frontend -->> Backend: Fetch entity
+    Frontend -->> Backend: Fetch policies
+    Frontend -->> Frontend: Evaluate & Apply EditableIf policy
+    Frontend -->> Frontend: Evaluate & Apply Visible policy
+
+</pre>
 
 ---
 
-## Others
+## Policy
+
+Policy evaluation is done in `policy.service.ts`
 
 ---
+
+
+# Thank you & Questions

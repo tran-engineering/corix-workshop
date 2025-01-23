@@ -156,16 +156,17 @@ But it can be engineered to do so.
 
 ## Software component lifecycle
 
-- Many companies have separate lifecycles for components of a system
-  Maybe this leads to separate implementations of policy enforcement too,
-  since it is hard to keep it in sync.
+Many companies have separate lifecycles for components of a system.
+Maybe this leads to separate implementations of policy enforcement too,
+since it is hard to keep it in sync.
 
 ---
 
 ## User Experience
 
 - Frontend policy validation
-- Live vs onsubmit policy checking
+- Live vs onsubmit policy checking.
+  Are the policies checked on the current/new entity or does it need to support both?
 
 ---
 
@@ -174,6 +175,7 @@ But it can be engineered to do so.
 - Single source of truth, not managing policies differently on front- / backend
 - Policies must be located near/at entities
 - Must be easy to understand / maintain
+  - Introducing new policy/entity should not require modifying code in multiple places
 
 ---
 
